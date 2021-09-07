@@ -93,6 +93,23 @@ void LoginIn(string fileName, int type)
 	else if (type == 3)
 	{
 		//管理员身份验证
+		string fName;
+		string fPwd;
+		
+		while (ifs >> fName && ifs >> fPwd)
+		{
+			if (fName == name && fPwd == pwd)
+			{
+				cout << "管理员验证登陆成功" << endl;
+				system("pause");
+				system("cls");
+
+				person = new Manager(name, pwd);
+				//显示管理员界面
+
+				return;
+			}
+		}
 	}
 
 	cout << "验证登陆失败" << endl;
