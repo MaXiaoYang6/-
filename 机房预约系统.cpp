@@ -4,6 +4,9 @@ using namespace std;
 #include <fstream>
 #include <string>
 #include "globalFile.h"
+#include "Teacher.h"
+#include "Student.h"
+#include "Manager.h"
 
 //登陆功能
 //参数1 操作文件名 参数2 操作的身份类型
@@ -49,11 +52,43 @@ void LoginIn(string fileName, int type)
 	if (type == 1)
 	{
 		//学生身份验证
+		int fId;//从文件中读取的id号
+		string  fName;//从文件中获取的姓名
+		string fPwd;//从文件中获取的密码
+		while (ifs >> fId && ifs >> fName && ifs >> fPwd)
+		{
+			if (fId == id && fName == name && fPwd == pwd)
+			{
+				cout << "学生验证登陆成功 ！" << endl;
+				system("pause");
+				system("cls");
+				person = new Student(id, name, pwd);
+				//进入学生身份的子菜单
 
+				return;
+			}
+		}
 	}
 	else if (type == 2)
 	{
 		//教师身份验证
+		int fId;
+		string fName;
+		string fPwd;
+
+		while (ifs >> fId && ifs >> fName && ifs >> fPwd)
+		{
+			if (fId == id && fName == name && fPwd == pwd)
+			{
+				cout << "教师验证登陆成功" << endl;
+				system("pause");
+				system("cls");
+				person = new Teacher(id, name, pwd);
+				//进入教师子菜单界面
+
+				return;
+			}
+		}
 	}
 	else if (type == 3)
 	{
@@ -103,6 +138,7 @@ int main()
 		case 0://Exit
 			cout << "欢迎下次使用！" << endl;
 			return 0;
+
 			break;
 
 		default:
